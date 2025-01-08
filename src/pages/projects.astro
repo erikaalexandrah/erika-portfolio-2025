@@ -1,0 +1,115 @@
+---
+import '../styles/global.css';
+import '@fontsource/montserrat/300.css';
+import '@fontsource/montserrat/800.css';
+import BaseLayout from '../layouts/baseLayout.astro';
+import { Icon } from 'astro-icon/components';
+
+const data: any[] = [
+    {
+        'title': 'Visuart - Tours arte Universidad Metropolitana',
+        'description1': 'Visuart es una aplicación WEB desarrollada con React como proyecto para la asignatura de Sistemas de Infomación. El equipo encargado de su desarrollo está compuesto por Beatriz Cardozo, Andre Scarcia, Angel Granado, Sebastian Castillo y yo, Erika Hernández.',
+        'description2': 'Esta aplicación tiene como objetivo principal ofrecer un sistema de reserva de tours de obras de arte en la Universidad Metropolitana . Se utilizó Firebase como base de datos.',
+        'image': 'https://firebasestorage.googleapis.com/v0/b/erika-4db4e.appspot.com/o/visuart.png?alt=media&token=6ff69538-1f8a-4446-bc8b-472b9c72f1fd',
+        'link': 'https://visuart-17959.web.app/',
+        'github': '/',
+    },
+    {
+        'title': 'Aplicación PWA para el Laboratorio de Procesos de Separación (Química)',
+        'description1': 'La aplicación web ProcessLab es una Progressive Web App (PWA) desarrollada con React y Next.js 13, utilizando Tailwind CSS. Fue creada especialmente para ser utilizada tanto por los estudiantes como profesores de la facultad de Ingeniería en la Universidad Metropolitana. Se encuentra actualmente en funcionamiento.',
+        'description2': 'ProcessLab permite a los estudiantes realizar reservas de espacios, equipos y material, mientras que los profesores y encargados gestionan las solicitudes y los inventarios. Utilizamos una API conectada a Google Drive y Google Sheets para la gestión de inventarios y Firebase para la autenticación JWT, garantizando la seguridad de los usuarios.',
+        'image': 'https://firebasestorage.googleapis.com/v0/b/erika-4db4e.appspot.com/o/process.png?alt=media&token=74fde50f-e4ba-4361-9fe4-482b088ade19',
+        'link': 'https://unimetprocesslab.vercel.app',
+        'github': '/',
+        
+    },
+    {
+        'title': 'Metrofy - Sistema de recomendaciones de música.',
+        'description1': 'Metrofy es una aplicación web tipo Progressive Web App (PWA) desarrollada con React y Next.js 14 como proyecto para la asignatura de Bases de Datos 2. El equipo encargado de su desarrollo está compuesto por Angel Granado, Rolando Sorrentino, Sebastián Castillo y yo, Erika Hernández.',
+        'description2': 'Esta aplicación tiene como objetivo principal ofrecer un sistema de recomendaciones de música personalizadas . Basándose en tus preferencias musicales, Metrofy te sugiere canciones y artistas relacionados que podrían interesarte. Para llevar a cabo este proceso, hemos empleado la base de datos Neo4J x para gestionar las conexiones y relaciones entre los elementos del sistema de recomendaciones.',
+        'image': 'https://firebasestorage.googleapis.com/v0/b/erika-4db4e.appspot.com/o/metrofy.png?alt=media&token=7f74cb5f-67f9-4012-adf6-dee30dd7abdd',
+        'link': 'https://metrofy.vercel.app',
+        'github': 'https://github.com/Pinchiri/metrofy',
+
+    },
+    {
+        'title': 'Buzzflix - Sistema de recomendaciones de películas.',
+        'description1': 'Buzzflix fue desarrollada con React y Next.js 14, utilizando Tailwind CSS para el frontend. Su backend fue construido utilizando el framework de Node NestJS como RestAPI. Adicionalmente se conecta con la API de TMDB para obtener las películas más recientes y actualizar la base de datos noSQL Neo4J AuraDB. ',
+        'description2': 'Su objetivo es servir como ejemplo para el manejo de Neo4J en las preparadurías de base de datos 2 de la Universidad Metropolitana.',
+        'image': '',
+        'link': 'https://unimet-buzzflix.vercel.app/',
+        'github': '/',
+    },
+    {
+        'title': 'Powerleds - E-commerce Venta Online Iluminación Led',
+        'description1': 'Powerled es una página web enfocada en la venta de productos de iluminación LED, diseñada para ofrecer una experiencia de compra eficiente y amigable. La plataforma cuenta con un carrito de compras integrado, permite a los usuarios subir comprobantes de pago y gestionar el estado de sus órdenes. Estas funcionalidades garantizan un flujo de compra transparente y organizado para los clientes.',
+        'description2': 'En el backend, se implementó un sistema robusto utilizando NestJS conectado a una base de datos MongoDB, mientras que el frontend fue creado con Next.js y componentes estilizados con DaisyUI para lograr una interfaz moderna y responsiva. Además, se incorporó un panel de administración que permite realizar operaciones CRUD, gestionar productos y visualizar estadísticas clave a través de gráficos intuitivos, facilitando la toma de decisiones comerciales.',
+        'image': 'https://firebasestorage.googleapis.com/v0/b/erika-4db4e.appspot.com/o/powerleds.png?alt=media&token=45f7b70b-043b-45f4-af4e-a573f9c7bc7e',
+        'link': 'https://powerleds.net',
+        'github': '/',
+    }
+]
+---
+
+<BaseLayout title="Proyectos">
+    <div class="container mx-auto px-4 md:px-8">
+        <h2 class="text-4xl md:text-6xl text-center mt-10 font-bold">MIS PROYECTOS</h2>
+        <div class="flex flex-row gap-[50px] sm:gap-[280px]">
+            <h4 class="text-lg md:text-xl text-center md:text-left">2013-2025</h4>
+            <div class="flex justify-center md:justify-end mt-4 md:mt-2">
+                <h5 class="text-md md:text-xl bg-lavander py-1 px-4 rounded-xl transform rotate-[-5deg] mt-2 mb-10">
+                    DEVELOP
+                </h5>
+            </div>
+        </div>
+
+        {data.map((project) => (
+        <div class="flex flex-col md:flex-row items-center md:items-start gap-8 mb-10">
+            <div class="md:w-1/2 text-gray-700 dark:text-gray-300 ml-4 md:ml-20 bg-neutral-200 dark:bg-darkGrid p-10 rounded-lg">
+              <h2 class="text-2xl font-bold mb-4">{project.title}</h2>
+              <p class="mb-4 text-md md:text-lg">
+                {project.description1}
+              </p>
+              <p class="mb-4 text-md md:text-lg">
+                {project.description2}
+              </p>
+            </div>
+            <figure class="relative z-[1] max-w-full w-full md:w-2/5 ml-5  h-auto rounded-b-lg">
+              <div class="relative flex justify-end items-end bg-neutral-200 rounded-t-lg py-4 px-8 dark:bg-neutral-700">
+                <div class="flex gap-x-2 absolute top-1/2 left-4 -translate-y-1/2">
+                  <span class="w-4 h-4 bg-red-600 rounded-full"></span>
+                  <span class="w-4 h-4 bg-yellow-400 rounded-full"></span>
+                  <span class="w-4 h-4 bg-green-500 rounded-full"></span>
+                </div>
+                <div class="flex justify-center items-center w-9/12 md:w-10/12 bg-gray-300 text-sm font-medium text-gray-800 rounded-lg py-2 px-8 sm:text-base dark:bg-neutral-600 dark:text-neutral-200">
+                  {project.link}
+                </div>
+              </div>
+              <div class="bg-gray-800 rounded-b-lg">
+                <img class="max-w-full h-auto rounded-b-lg" src={project.image} alt="{project.title} Placeholder">
+              </div>
+
+              <div class="flex justify-center gap-4 mt-7">
+                <a class='btn px-2 py-3 flex flex-row gap-1 transform hover:scale-105' href={project.link}>
+                    <Icon name="web" size="20" class="icon" />
+                    Ver proyecto 
+                </a>
+                <a class='btn px-2 py-3 flex flex-row gap-3 transform hover:scale-105' href={project.github}>
+                    <Icon name="github" size="20" class="icon" />
+                    Ver Repositorio
+                </a>
+              </div>
+            </figure>
+          </div>
+        ))}
+    </div>    
+</BaseLayout>
+
+<style>
+    h5 {
+        color: black;
+    }
+    p {
+        font-family: 'Montserrat', sans-serif; 
+    }
+</style>

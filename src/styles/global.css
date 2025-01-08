@@ -1,0 +1,86 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+/* Estilos para el cuerpo */
+body {
+  @apply m-0 w-full h-full flex items-start justify-start py-5 pl-8 
+         bg-background text-text 
+         bg-[radial-gradient(circle,_#e3dcdc_2px,_transparent_2px),_linear-gradient(#e0e0e0_1px,_transparent_1px),_linear-gradient(90deg,#e0e0e0_1px,_transparent_1px)] 
+         bg-[size:40px_40px] bg-[position:20px_20px,0_0,0_0];
+}
+
+/* Modo oscuro para el cuerpo */
+.dark body {
+  @apply bg-darkBackground text-darkText 
+         bg-[radial-gradient(circle,_#6a6a6a_2px,_transparent_2px),_linear-gradient(#4a4a4a_1px,_transparent_1px),_linear-gradient(90deg,#4a4a4a_1px,_transparent_1px)];
+}
+
+/* Estilos para encabezados */
+h1, h2, h3, h4, h5, h6 {
+  @apply text-heading font-black;
+  font-family: 'Montserrat', sans-serif; 
+}
+
+p{
+	font-family: 'Montserrat', sans-serif; 
+}
+/* Modo oscuro para encabezados */
+.dark h1, .dark h2, .dark h3, .dark h4, .dark h5, .dark h6 {
+  @apply text-darkHeading;
+}
+
+/* Estilos para párrafos */
+p {
+  @apply text-text leading-7 my-2.5;
+}
+
+/* Modo oscuro para párrafos */
+.dark p {
+  @apply text-darkText;
+}
+
+.card{
+	background: white;
+}
+
+.dark .card{
+	background-color: #424040;
+}
+
+.icon{
+	color: #424040; 
+    fill: #424040; 
+}
+
+.dark .icon{
+	color: white; 
+	fill: white; 
+}
+
+.container{
+	margin-left: -40px;
+	width:100vw;
+	height:100vh;
+	display: flex;
+	flex-direction: column;
+	justify-content: start;
+	align-items: center;
+}
+
+.btn{
+	background-color: #e0e0e0;
+	text-decoration: none;
+	border-radius: 10px;
+	text-align: center;
+	font-weight: bold;
+	transition: border-color 0.2s ease-in-out, transform 0.2s ease-in-out;
+	font-family: 'Montserrat', sans-serif; 
+	font-weight: 300;
+	color: black;
+}
+
+.dark .btn{
+	background-color: #424040;
+	color: white;
+}

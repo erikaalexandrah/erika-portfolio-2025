@@ -1,0 +1,114 @@
+---
+import BaseLayout from "../layouts/baseLayout.astro";
+import { Icon } from 'astro-icon/components';
+import '../styles/global.css';
+import '@fontsource/montserrat/300.css';
+import '@fontsource/montserrat/800.css';
+
+const information = [
+    {
+        date: '2013',
+        description: 'Septiembre 2013<br>Inicio carrera de Medicina<br>Universidad Central de Venezuela<br>Escuela Luis Razetti',
+        icon:'medicine',
+    },
+    {
+        date: '2014',
+        description: 'Reconocimiento a la excelencia académica.<br>Cátedra de Bioquímica.',
+        icon:'medal',
+    },
+    {
+        date: '2015',
+        description: 'Reconocimiento a la excelencia académica.<br>Cátedra de Fisiología Normal.',
+        icon:'medal',
+    },
+    {
+        date: '2019',
+        description: 'Internado Rotatorio de Pregrado.<br>Hospital Domingo Luciani.<br>Caracas, Venezuela.<br><br>Pasantía Médica Rural.<br>Ambulatorio Rural tipo II.<br>Comunidad Indígena de Kanaimö. ',
+        icon:'hospital',
+
+    },
+    {
+        date: '2020',
+        description: 'Grado en Medicina  - Médico Cirujano.<br>Universidad Central de Venezuela.<br>Mención Cum Laude.<br>Puesto 6/169 en promoción.',
+        icon:'graduation',
+
+    },
+    {
+        date: '2022',
+        description: 'Septiembre 2022.<br>Inicio carrera Ingeniería de Sistemas.<br>Universidad Metropolitana.',
+        icon:'university',
+    },
+    {
+        date: '2023',
+        description: 'Reconocimiento a la excelencia académica Lista del Rector UNIMET.<br/><br/>Diplomado en Desarrollo Software.<br/> - Algoritmos y Programación.<br/> - Estructura de Datos.<br/> - Base de Datos 1.<br/> - Sistemas de Información.<br/><br/>Diplomado en Análisis en Diseño y Procesamiento de Datos.<br/> - Estructura de Datos.<br/> - Arquitectura del Computador.<br/> - Organización del Computador.<br/> - Bases de Datos.<br/><br/>Inicio preparadurías Base de Datos 1. <br/> - PostgreSQL',
+        icon:'prepa',
+    },
+    {
+        date: '2024',
+        description: 'Inicio preparadurías Base de Datos II.<br/> - Base de Datos NoSQL: MongoDB.<br/> - Base de Datos noSQL: Neo4J.<br/> - ETL: Pentaho Data Integration.<br/> - Backend: NestJS.<br/><br/>Inicio preparadurías Ingeniería de Software.<br/> - Metodología Ágil: Scrum.<br/><br/>Ganadora al mejor proyecto desarrollado en la asignatura Contenidos Digitales para el Metaverso. MetroTour. Desarrollo en Unity.',
+        icon:'prepa',
+    },
+];
+---
+<BaseLayout title="Lecciones">
+    <div class="container mx-auto px-4 md:px-8">
+        <h2 class="text-4xl md:text-6xl text-center mt-10 font-bold">TRAYECTORIA</h2>
+        <div class="flex flex-row gap-[50px] sm:gap-[180px]">
+            <h4 class="text-lg md:text-xl text-center md:text-left">2013-2025</h4>
+            <div class="flex justify-center md:justify-end mt-4 md:mt-2">
+                <h5 class="text-md md:text-xl bg-lavander py-1 px-4 rounded-xl transform rotate-[-8deg] mt-2 md:mt-4">
+                    ROADMAP
+                </h5>
+            </div>
+        </div>
+
+        <!-- Timeline Content -->
+        <div class="flex flex-col grid-cols-9 p-2 mx-auto md:grid">
+            {information.map((item, index) => (
+                index % 2 === 0 ? (
+                    <!-- Format 1: Right -->
+                    <div class="flex md:contents flex-row-reverse">
+                        <div
+                            class="relative p-4 my-6 text-gray-800 bg-white card shadow-xl rounded-xl col-start-1 col-end-5 mr-auto md:mr-0 md:ml-auto w-full lg:w-[350px]">
+                            <h3 class="text-lg font-semibold lg:text-xl">{item.date}</h3>
+                            <p class="mt-2 leading-6" set:html={item.description}></p>
+                            <div class="flex flex-row justify-center items-center">
+                                <Icon name={item.icon || "folder"} size="100" class="icon" />
+                            </div>
+                        </div>
+                        <div class="relative col-start-5 col-end-6 mr-7 md:mx-auto">
+                            <div class="flex items-center justify-center w-6 h-full">
+                                <div class="w-1 h-full bg-milka rounded-t-full bg-gradient-to-b from-milka to-milka"></div>
+                            </div>
+                            <div class="absolute w-6 h-6 -mt-3 bg-milka border-4 border-milka rounded-full top-1/2"></div>
+                        </div>
+                    </div>
+                ) : (
+                    <!-- Format 2: Left -->
+                    <div class="flex md:contents">
+                        <div class="relative col-start-5 col-end-6 mr-7 md:mx-auto">
+                            <div class="flex items-center justify-center w-6 h-full">
+                                <div class="w-1 h-full bg-milka"></div>
+                            </div>
+                            <div class="absolute w-6 h-6 -mt-3 bg-milka border-4 border-milka rounded-full top-1/2"></div>
+                        </div>
+                        <div class="relative p-4 my-6 text-gray-800 bg-milka rounded-xl col-start-6 col-end-10 mr-auto card shadow-xl w-full lg:w-[350px]">
+                            <h3 class="text-lg font-semibold lg:text-xl">{item.date}</h3>
+                            <p class="mt-2 leading-6" set:html={item.description}></p>
+                            <div class="flex flex-row justify-center items-center"><Icon name={item.icon || "folder"} size="100" class="icon" /></div>
+                        </div>
+                    </div>
+                )
+            ))}
+        </div>
+    </div>
+</BaseLayout>
+
+<style>
+    h5 {
+        color: black;
+    }
+    p {
+        font-family: 'Montserrat', sans-serif; 
+    }
+</style>

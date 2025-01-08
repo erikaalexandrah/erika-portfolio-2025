@@ -1,0 +1,28 @@
+---
+import { ViewTransitions } from 'astro:transitions';
+import Navbar from "../components/Navbar.astro";
+const { title } = Astro.props;
+---
+
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{title}</title>
+    <link rel="stylesheet" href="/styles/global.css">
+    <ViewTransitions />
+    <script src="/src/scripts/darkMode.js"></script>
+    </style>
+
+</head>
+<body class="dark:bg-darkBackground">
+    <header>
+    </header>
+    <main>
+       <Navbar />
+       <slot /> 
+    </main>
+    <footer>
+    </footer>
+</body>
+</html>

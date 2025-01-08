@@ -1,11 +1,29 @@
 ---
-import Welcome from '../components/Welcome.astro';
-import Layout from '../layouts/Layout.astro';
-
-// Welcome to Astro! Wondering what to do next? Check out the Astro documentation at https://docs.astro.build
-// Don't want to use any of this? Delete everything in this file, the `assets`, `components`, and `layouts` directories, and start fresh.
+import { Icon } from 'astro-icon/components';
+import BaseLayout from '../layouts/baseLayout.astro';
+import '../styles/global.css';
+import '@fontsource/montserrat/300.css';
+import '@fontsource/montserrat/800.css';
 ---
 
-<Layout>
-	<Welcome />
-</Layout>
+<BaseLayout>
+	<div class="w-full flex flex-col justify-center items-start md:mx-6 relative">
+		
+		<h1 class="text-black dark:text-white text-4xl md:text-7xl font-bold whitespace-pre-line">
+			ERIKA HERNÁNDEZ
+			ZURILLA
+		</h1>
+
+		<h2 class="text-black dark:text-white text-2xl md:text-4xl font-medium whitespace-pre-line mt-[-15px]">
+			Desarrollo web full-stack.
+			Diseño UI/UX.
+		</h2>
+
+		<div class="w-full flex justify-center mt-8 md:mt-12">
+			<Icon 
+				name="pencil" 
+				class="w-full max-w-[700px] h-auto" 
+			/>
+		</div>
+	</div>
+</BaseLayout>

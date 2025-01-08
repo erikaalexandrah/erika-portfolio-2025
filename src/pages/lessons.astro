@@ -1,0 +1,306 @@
+---
+import { Icon } from 'astro-icon/components';
+import '@fontsource/montserrat/300.css';
+import '@fontsource/montserrat/800.css';
+import BaseLayout from "../layouts/baseLayout.astro";
+import '../styles/global.css'
+
+
+const lessons = [
+    {
+        number: 1,
+        icon: 'folder',
+        title: 'Organización de Archivos',
+        description: 'Se abordan temas de organización de archivos (secuencial, directo, indexado); registros extensibles y no extensibles; y el uso de estructuras como árboles B+ y Bitmaps para mejorar el acceso a datos. También se desarrollan ejercicios prácticos sobre transferencia de datos, cálculo del factor de bloqueo, optimización de consultas, y técnicas de manejo de colisiones en archivos con índices hash.',
+        link: 'https://www.youtube.com/watch?v=YzPiGgtEHbI&t=3s&ab_channel=ErikaHern%C3%A1ndez',
+        tags: ['Montículo', 'Hash Table', 'Secuencial'],
+        pdfLink: 'https://drive.google.com/file/d/1aAKgzWaSEVH7W_EQN1Gmx14dQenqsm0t/view?usp=sharing',
+    },
+    {
+        number: 2,
+        icon: 'index',
+        title: 'Manejo de Índices',
+        description: 'Se abordan el tema de la construcción de índices frente a los tres tipos de organización de archivo, además de cuales son estos tipos de índices (primario, secundario, agrupado, bitmap), así mismo se realizan ejercios sobre la construcción del mismo. ',
+        link: 'https://www.youtube.com/watch?v=ZmDM4hvcMgQ&t=3342s&ab_channel=ErikaHern%C3%A1ndez',
+        tags: ['Primario', 'Agrupado', 'Secundario'],
+        pdfLink: 'https://drive.google.com/file/d/1AAVqCV-Eh02hnJqRBeqPMIN9c-LfzLjr/view?usp=sharing',
+    },
+    {
+        number: 3,
+        icon: 'query',
+        title: 'Procesamiento Consultas',
+        description: 'Se abordan temas como los pasos que sigue el sistema manejador de base de datos para optimizar las consultas. Se simula el proceso desde la construcción de árboles canónicos aplicando los axiomas para optimización heurística.',
+        link: 'https://www.youtube.com/watch?v=gChDvmRhpbA&ab_channel=ErikaHern%C3%A1ndez',
+        tags: ['Canónico', 'Heurística', 'Axiomas'],
+        pdfLink: 'https://drive.google.com/file/d/1k0xEG1opgkTc5DP2PR2Yz7ekCbt83k95/view?usp=sharing',
+    },
+    {
+        number: 4,
+        icon: 'server',
+        title: 'BDD - Fragmentación',
+        description: 'Se abordan los temas de fragmentación vertical, horizontal y derivada de las tablas para su posterior distribución en los nodos de la base de datos distribuidas. Se realizan ejercicios para consolidar los conocimientos. ',
+        link: 'https://youtu.be/aDOgDJ6RdEw',
+        tags: ['Derivada', 'Sharding', 'Disyunción'],
+        pdfLink: 'https://drive.google.com/file/d/1KBIxQz8f4f_mH5ldZURPPk7xGyCKaPz8/view?usp=sharing',
+    },
+    {
+        number: 5,
+        title: 'MongoDB Teoría',
+        icon: 'mongo',
+        description: 'Se abordan todos los aspectos teóricos de MongoDB incluyendo configuración del cluster (mongoS, config server, mongoD), fragmentación, motores de consultas (find y aggregation), ejercicios, crud y validation schema.',
+        link: 'https://www.youtube.com/watch?v=7L7x5V6d0iE&ab_channel=ErikaHern%C3%A1ndez',
+        tags: ['MongoQL', 'Cluster', 'JsonSchema'],
+        pdfLink: 'https://drive.google.com/file/d/18CnKO96t4TFpVrUeSOQYOk8Rcibp8Tp5/view?usp=sharing',
+    },
+    {
+        number: 6,
+        title: 'MongoDB Práctica',
+        icon: 'mongo',
+        description: 'Se abordan ejercicios en MongoQL que involucran consultas find y de aggregation utilizando los diferentes operadores y modificadores de lectura. Se realizan las consultas en MongoDB Compass.',
+        link: 'https://www.youtube.com/watch?v=TxMCbWb7E1I&t=1718s&ab_channel=ErikaHern%C3%A1ndez',
+        tags: ['MongoQL', 'Aggregation', 'JsonSchema'],
+        pdfLink: 'https://drive.google.com/file/d/1Ip5p6nLZD0TkPbprJahxdQAyDYM6soLL/view?usp=sharing',
+    },
+    {
+        number: 7,
+        title: 'Repaso Preparcial',
+        icon: 'class',
+        description: 'Se realizan diferentes ejercicios de organización de archivos, índices, bases de datos distribuidas (fragmentación). Se repasan los conceptos básicos de bases de datos NoSQL, arquitecturas, tipos de replicación y ejercicios. ',
+        link: 'https://www.youtube.com/watch?v=I7zerPFJs5k&feature=youtu.be',
+        tags: ['NoSQL', 'SloppyQuorum', 'Brewer'],
+        pdfLink: 'https://drive.google.com/file/d/1SeGt5ms_4RhvmFgWq-khB7Epx1O7FsCD/view?usp=sharing',
+    },
+    {
+        number: 8,
+        title: 'Backend NestJS #1',
+        icon: 'nest',
+        description: 'Se aborda teóricamente los conceptos básicos de los componentes que ofrece NestJS incluyendo módulos, controladores. Se explica a detalle la arquitectura MVC y se consolida el concepto de ORM.',
+        link: 'https://www.youtube.com/watch?v=tRgmrji_co4&ab_channel=ErikaHern%C3%A1ndez',
+        tags: ['MVC', 'NestCLI', 'Controller'],
+        pdfLink: 'https://drive.google.com/file/d/1SFfSvFMW0AJvNBOcQDQSq-0dih_0xgPL/view?usp=sharing',
+    },
+    {
+        number: 9,
+        title: 'Backend NestJS #2',
+        icon: 'nest',
+        description: 'Se continúa con el análisis teórico de los componentes teóricos para Backend continuando con DTOS, servicios, pipes de validación, documentación con Swagger y ccódigos de respuesta HTTP.',
+        link: 'https://www.youtube.com/watch?v=El56y_GdiBg&ab_channel=ErikaHern%C3%A1ndez',
+        tags: ['Module', 'Service', 'NestSwagger'],
+        pdfLink: 'https://drive.google.com/file/d/1SFfSvFMW0AJvNBOcQDQSq-0dih_0xgPL/view?usp=sharing',
+    },
+    {
+        number: 10,
+        title: 'Backend NestJS #3',
+        icon: 'nest',
+        description: 'Se aplica toda la teoría a un ejercicio práctico de construcción de una RestAPI conectada con MongoDB Atlas a través de Mongoose y se documenta con Swagger. ',
+        link: 'https://www.youtube.com/watch?v=_ZTT4J51PdU&ab_channel=ErikaHern%C3%A1ndez',
+        tags: ['Mongoose', 'Resource', 'Pipes'],
+        pdfLink: 'https://drive.google.com/file/d/1SFfSvFMW0AJvNBOcQDQSq-0dih_0xgPL/view?usp=sharing',
+    },
+    {
+        number: 11,
+        title: 'Pentaho Data Integration',
+        icon: 'etl',
+        description: 'Se aborda el concepto de ETL, las herramientas que ofrece PDI además de Spoon para brindar una solución OLAP completa. Se comienzan aplicar los componentes de importación / exportación.',
+        link: 'https://www.youtube.com/watch?v=5adJfQhih0E&ab_channel=ErikaHern%C3%A1ndez',
+        tags: ['Spoon', 'PDI', 'ETL'],
+        pdfLink: 'https://drive.google.com/file/d/1vK3caNCWYv7wfDb21XQSCWBHlMC6tNSb/view?usp=sharing',
+    },
+    {
+        number: 12,
+        title: 'Pentaho Data Integration',
+        icon: 'etl',
+        description: 'Se continuan evaluando todas las herramientas de transformación, lookup, join, utility, statistic y flow que ofrece Spoon mediante ejemplo de consolidación de ejercicios previos. ',
+        link: 'https://www.youtube.com/watch?v=eMc6hed00aQ&ab_channel=ErikaHern%C3%A1ndez',
+        tags: ['Extracción', 'Transformación', 'Carga'],
+        pdfLink: 'https://drive.google.com/file/d/1vK3caNCWYv7wfDb21XQSCWBHlMC6tNSb/view?usp=sharing',
+    },
+    {
+        number: 13,
+        title: 'BD NoSQL Neo4j - Teoría',
+        icon: 'neo4j',
+        description: 'Se aborda el concepto el modelado de datos orientado a Grafos, como crear una instancia en Aura y a utilizar teóricamente todos los operadores en Cypher. ',
+        link: 'https://www.youtube.com/watch?v=MfergsQXNi4&ab_channel=ErikaHern%C3%A1ndez',
+        tags: ['Grafo', 'Cypher', 'Aura'],
+        pdfLink: 'https://drive.google.com/file/d/1JM1QpLt2xGEggrXTFJZaWFvPO8bQ9tW-/view?usp=sharing',
+    },
+    {
+        number: 14,
+        title: 'BD NoSQL Neo4j - Práctica',
+        icon: 'neo4j',
+        description: 'Se realizan diversos ejercicios de consulta sobre una base de datos de películas de TMDB para hacer consultas de recomendación y práctica de operadores para agrupaciones e indicadores.',
+        link: 'https://www.youtube.com/watch?v=rLpDoUCTHSI&ab_channel=ErikaHern%C3%A1ndez',
+        tags: ['Aura', 'ShortestPath', 'Relaciones'],
+        pdfLink: 'https://drive.google.com/file/d/1GrCZUb4KT0mr0O2PzHWIkFtfGOTDMFLu/view?usp=sharing',
+    },
+    {
+        number: 15,
+        title: 'BI: Modelo Dimensional',
+        icon: 'business',
+        description: 'Se aborda los conceptos de OLTP vs OLAP, datawarehouse vs datamart. Los componentes de un modelo dimensional y sus tipos (estrella, copo de nieve y constelación). Se realizan ejercicios.',
+        link: 'https://www.youtube.com/watch?v=gFJi07Z-sKc&ab_channel=ErikaHern%C3%A1ndez',
+        tags: ['Estrella', 'Copo de Nieve', 'Constelación'],
+        pdfLink: 'https://drive.google.com/file/d/1hnzjMbx7aPx8ljXg2MbE2UH5__Dv6i_o/view?usp=sharing',
+    },
+    {
+        number: 16,
+        title: 'Big Data & Repaso',
+        icon: 'spark',
+        description: 'Se explican las V’s de Big Data, se especifica los elementos que utiliza HDFS, componentes de Yarn, diferencias entre Big Data, Inteligencia de Negocios y Análisis de datos. Así como también repaso de ejercicios de modelado dimensional.',
+        link: 'https://www.youtube.com/watch?v=eckZgfLq6z4&ab_channel=ErikaHern%C3%A1ndez',
+        tags: ['Lambda', 'Kappa', 'BI'],
+        pdfLink: 'https://drive.google.com/file/d/15ZuwmhHNFKNbipAyOuNEkQCEhp71z_5_/view?usp=sharing',
+    },
+    {
+        number: 1,
+        title: 'Generalidades BD’s',
+        icon: 'database',
+        description: 'Se abordan conceptos teóricos básicos como sistema manejador de base de datos, tipos de lenguajes en BD, roles de los usuarios en base de datos, diseño de BD. Se realizan ejercicios.',
+        link: 'https://drive.google.com/file/d/1Apyvm2M5vxVfLOwl546uOzTG86KvDc2j/view?usp=sharing',
+        tags: ['ER', 'Relacional', 'Diseño Físico'],
+        pdfLink: 'https://drive.google.com/file/d/1ZqvvffKwemrPsQrh0Z7WcSKN-eLKwmut/view?usp=sharing',
+    },
+    {
+        number: 2,
+        title: 'Modelo ER Parte #1',
+        icon: 'relation',
+        description: 'Se comienza prácticando ejercicios básicos para el mejor entendimiento de los conceptos de entidad, relación, mutiplicidad y definición de los atributos. ',
+        link: 'https://drive.google.com/file/d/1iChOLQL15lGz1U9PYG05vh_yys07ke8N/view?usp=sharing',
+        tags: ['Entidad', 'Relación', 'Multiplicidad'],
+        pdfLink: 'https://drive.google.com/file/d/159t-eHbsj8sKHbvi0dXXZEuyIjTjzigO/view?usp=sharing',
+    },
+    {
+        number: 3,
+        title: 'Modelo ER Parte #2',
+        icon: 'relation',
+        description: 'Se abordan ejercicios de mayor complejidad para el modelo de datos con entidad-relación. Se tratan conceptos como entidades débiles, relaciones ternarias, herencia, multiplicidad, participación y diyunción.',
+        link: 'https://drive.google.com/file/d/1f6jDkhbsqUKdPKEZBGUJ6g5b38_f6LEY/view?usp=sharing',
+        tags: ['Herencia', 'Disyunción', 'Ejercicios'],
+        pdfLink: 'https://drive.google.com/file/d/1AXF-lGKvI-5TtKuwTPh4yjar6GKUStXC/view?usp=sharing',
+    },
+    {
+        number: 4,
+        title: 'Modelo Relacional',
+        icon: 'tables',
+        description: '',
+        link: 'https://drive.google.com/file/d/1JNWRiD5xVVjWDUQmMBgQkz_AlDjOqTyj/view?usp=sharing',
+        tags: ['Transformación', 'Relación', 'FK'],
+        pdfLink: 'https://drive.google.com/file/d/1ZWAUEWPqucO4wGc1dHD7Zph7ZyyRK97r/view?usp=sharings',
+    },
+    {
+        number: 5,
+        title: 'Algebra Relacional',
+        icon: 'algebra',
+        description: '',
+        link: 'https://www.youtube.com/watch?v=qQtGA29Gaiw&ab_channel=ErikaHern%C3%A1ndez',
+        tags: ['Operadores', 'Selección', 'Proyección'],
+        pdfLink: 'https://drive.google.com/file/d/1U17e2KJSAJyVhQp7tKGsyzf-hVKZlMxj/view?usp=sharing',
+    },
+    {
+        number: 6,
+        title: 'Consultas SQL DML',
+        icon: 'sql',
+        description: '',
+        link: 'https://www.youtube.com/watch?v=I_7tfhW8-Dc&ab_channel=ErikaHern%C3%A1ndez',
+        tags: ['Join', 'Select', 'Group by'],
+        pdfLink: 'https://drive.google.com/file/d/1k_Ebc1IlSTsiSZXV6HAPzFSlF1p4V13Q/view?usp=sharing',
+    },
+    {
+        number: 7,
+        title: 'Diseño físico DDL',
+        icon: 'postgresql',
+        description: '',
+        link: 'https://www.youtube.com/watch?v=xLrSY7rYJZs&ab_channel=ErikaHern%C3%A1ndez',
+        tags: ['Tablas', 'Trigger', 'Domain'],
+        pdfLink: 'https://drive.google.com/file/d/1YW8iI2wKYYzhuL3ulHDIq604e0p45fVT/view?usp=sharing',
+    },
+    {
+        number: 8,
+        title: 'Normalización',
+        icon: 'atomic',
+        description: '',
+        link: 'https://www.youtube.com/watch?v=0UNNZugd4BM&ab_channel=ErikaHern%C3%A1ndez',
+        tags: ['Boyd-Codd', 'Formas', 'Normales'],
+        pdfLink: 'https://drive.google.com/file/d/1KHsgT5gKweBxXPXLsX-KJMgDn3zT_-k9/view?usp=sharing',
+    },
+    {
+        number: 9,
+        title: 'Transacciones',
+        icon: 'commit',
+        description: '',
+        link: 'https://youtu.be/0UNNZugd4BM',
+        tags: ['Checkpoint', 'Rollback', 'Commit'],
+        pdfLink: 'https://drive.google.com/file/d/1h3RYcuVYgME1nLwXLPWJBV7b0YSTzkal/view?usp=sharing',
+    },
+    {
+        number: 10,
+        title: 'Control Concurrencia',
+        icon: 'concurrence',
+        description: '',
+        link: 'https://drive.google.com/file/d/1ZK1lCDxZcju_Qvg3-0ITTVJSe0lHeYMv/view?usp=sharing',
+        tags: ['Bloqueo', 'Exclusivo', 'Compartido'],
+        pdfLink: 'https://drive.google.com/file/d/1X18o3uueutctKd0O2k4rTHg2Hxk5IBl5/view?usp=sharing',
+    },
+];
+---
+
+<BaseLayout title="Lecciones">
+    <div class="container mx-auto px-4 md:px-8">
+        <h2 class="text-4xl md:text-6xl text-center mt-10 font-bold text-black dark:text-white">PREPARADURÍAS</h2>
+        <div class="flex flex-row gap-[50px] sm:gap-[330px] mb-10">
+            <h4 class="text-lg md:text-xl text-center md:text-left">2013-2025</h4>
+            <div class="flex justify-center md:justify-end mt-4 md:mt-2">
+                <h5 class="text-md md:text-xl bg-lavander py-1 px-4 rounded-xl transform rotate-[-5deg] mt-2 md:mt-4">
+                    UNIMET
+                </h5>
+            </div>
+        </div>
+            
+        <div class="display flex flex-row flex-wrap gap-4 justify-around">
+            {lessons.map((lesson) => (
+                <div class="lesson-card card flex flex-col md:flex-row bg-white dark:bg-plumber text-black dark:text-gray-200 rounded-xl p-4 my-4 shadow-md gap-4 w-full md:w-5/12">
+                    <!-- Izquierda: SVG o Ícono -->
+                    <div class="lesson-card-left flex justify-center items-center rounded-xl overflow-hidden md:flex-[1_1_40%] w-full md:w-auto">
+                        <Icon name={lesson.icon || "folder"} size="180" class="text-black dark:text-white" />
+                    </div>
+                    <!-- Derecha: Contenido -->
+                    <div class="lesson-card-right flex flex-col gap-2 w-full md:flex-[1_1_60%]">
+                        <div class="flex items-center gap-2">
+                            <h4 class="bg-milka text-white rounded-full px-4 py-2 text-sm font-bold">{lesson.number}</h4>
+                            <h3 class="text-lg font-extrabold">{lesson.title}</h3>
+                        </div>
+                        <p class="text-sm font-light line-clamp-4 leading-6">{lesson.description}</p>
+                        <div class="lesson-tags flex flex-wrap gap-2 mt-2">
+                            {lesson.tags.map(tag => (
+                                <span class=" bg-lavander text-black dark:text-white px-2 py-1 rounded-md text-xs font-medium">
+                                    {tag}
+                                </span>
+                            ))}
+                        </div>
+                        <div class="lesson-actions flex flex-wrap gap-2 mt-2">
+                            <a href={lesson.link} class="border-2 border-black dark:border-white text-black dark:text-white rounded-lg px-4 py-2 text-sm font-medium transition-transform transform hover:scale-105">
+                                Ver video
+                            </a>
+                            <a href={lesson.pdfLink} class="border-2 border-black dark:border-white text-black dark:text-white rounded-lg px-4 py-2 text-sm font-medium transition-transform transform hover:scale-105">
+                                Descargar PDF
+                            </a>
+                        </div>
+        </div>
+    </div>
+))}
+
+            ))}
+        </div>
+    </div>
+
+</BaseLayout>
+
+<style>
+    h5{
+        color:black
+    }
+
+    p, span, a {
+        font-family: 'Montserrat', sans-serif; 
+    } 
+</style>
