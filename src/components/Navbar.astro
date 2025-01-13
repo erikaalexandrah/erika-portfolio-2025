@@ -109,73 +109,123 @@ import projects from '../assets/projects.svg';
 <body class="relative bg-gray-100 dark:bg-gray-900 text-gray-800 dark:text-gray-200 transition-colors">
     <div class="navbar">
         <!-- Home Icon -->
-        <div class="navbar-item" title="Home">
+        <div class="navbar-item">
             <a href="/">
                 <img src={house.src} alt="Home" />
             </a>
-            <div class="tooltip">Home</div>
+            <div class="tooltip" data-i18n-key="home">Home</div>
         </div>
 
         <!-- Formation Icon -->
-        <div class="navbar-item" title="Formation">
+        <div class="navbar-item">
             <a href="/formation">
                 <img src={book.src} alt="Formation" />
             </a>
-            <div class="tooltip">Formation</div>
+            <div class="tooltip" data-i18n-key="formation">Formation</div>
         </div>
 
         <!-- Lessons Icon -->
-        <div class="navbar-item" title="Lessons">
+        <div class="navbar-item">
             <a href="/lessons">
                 <img src={lessons.src} alt="Lessons" />
             </a>
-            <div class="tooltip">Lessons</div>
+            <div class="tooltip" data-i18n-key="lessons">Lessons</div>
         </div>
 
         <!-- Projects Icon -->
-        <div class="navbar-item" title="Projects">
+        <div class="navbar-item">
             <a href="/projects">
                 <img src={projects.src} alt="Projects" />
             </a>
-            <div class="tooltip">Projects</div>
+            <div class="tooltip" data-i18n-key="projects">Projects</div>
         </div>
 
         <!-- LinkedIn Icon -->
-        <div class="navbar-item" title="LinkedIn">
+        <div class="navbar-item">
             <a href="https://www.linkedin.com/in/erikaalexandrah/" target="_blank">
                 <img src={linkedin.src} alt="LinkedIn" />
             </a>
-            <div class="tooltip">LinkedIn</div>
+            <div class="tooltip" data-i18n-key="linkedin">LinkedIn</div>
         </div>
-
-        <!-- Divider -->
-        <div class="navbar-divider"></div>
 
         <!-- Dark Mode Toggle -->
         <div class="navbar-item">
             <button id="dark-mode-toggle" aria-label="Toggle Dark Mode">
                 <img src={moon.src} alt="Dark Mode" />
             </button>
-            <div class="tooltip">Dark Mode</div>
+            <div class="tooltip" data-i18n-key="darkMode">Dark Mode</div>
         </div>
 
         <!-- Language Toggle -->
-        <div class="navbar-item" title="Settings">
-            <button>
+        <div class="navbar-item">
+            <button id="language-mode-toggle" aria-label="Toggle Language Mode">
                 <img src={language.src} alt="Language" />
             </button>
-            <div class="tooltip">Language</div>
+            <div class="tooltip" data-i18n-key="language">Language</div>
         </div>
     </div>
 
     <script>
-        // Fix for potential null reference
-        const darkModeToggle = document.getElementById('dark-mode-toggle');
-        if (darkModeToggle) {
-            darkModeToggle.addEventListener('click', () => {
-                document.body.classList.toggle('dark');
+        interface Translations {
+            [language: string]: {
+                [key: string]: string;
+            };
+        }
+
+        const translations: Translations = {
+            en: {
+                home: "Home",
+                formation: "Formation",
+                lessons: "Lessons",
+                projects: "Projects",
+                linkedin: "LinkedIn",
+                darkMode: "Dark Mode",
+                language: "Language",
+            },
+            es: {
+                home: "Inicio",
+                formation: "Formación",
+                lessons: "Lecciones",
+                projects: "Proyectos",
+                linkedin: "LinkedIn",
+                darkMode: "Modo Oscuro",
+                language: "Idioma",
+            },
+        };
+
+        // Selección de elementos con tipado correcto
+        const tooltips = document.querySelectorAll<HTMLElement>('[data-i18n-key]');
+
+        // Idioma actual con tipado
+        let currentLanguage: keyof typeof translations = (localStorage.getItem('language') as keyof typeof translations) || 'en';
+
+        // Función para actualizar los tooltips con tipado seguro
+        function updateTooltips() {
+            tooltips.forEach((tooltip) => {
+                const key = tooltip.getAttribute('data-i18n-key') as string; // Indicamos que será un string
+                if (key && translations[currentLanguage][key]) {
+                    tooltip.textContent = translations[currentLanguage][key];
+                }
             });
         }
+
+        // Función para alternar el idioma
+        function toggleLanguage() {
+            currentLanguage = currentLanguage === 'en' ? 'es' : 'en';
+            localStorage.setItem('language', currentLanguage);
+            updateTooltips();
+        }
+
+        // Configurar el botón de cambio de idioma
+        const languageModeToggle = document.getElementById('language-mode-toggle');
+        if (languageModeToggle) {
+            languageModeToggle.addEventListener('click', toggleLanguage);
+        }
+
+        // Inicializar los tooltips al cargar la página
+        document.addEventListener('DOMContentLoaded', updateTooltips);
+
     </script>
+    
 </body>
 </html>
